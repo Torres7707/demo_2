@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Firebase Authentication</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
+</head>
+
+<body>
+    <template id="page-1">
+        <div class="tabcontent" style="max-width: 400px;margin-top: 100px;">
+            <h1 class="teal-text center-align">{{title}}</h1>
+            <input type="text" v-model="email" placeholder="Email" class="center-align"><br>
+            <input type="password" v-model="password" placeholder="Password" class="center-align"><br>
+            <div class="center-align">
+                <button @click="signIn" class="btn teal">sign in</button>
+                <button @click="pageset1" class="btn teal">sign up</button>
+            </div>
+
+        </div>
+    </template>
+
+    <template id="page-2" class="tabcontent">
+        <div class="tabcontent" style="max-width: 400px;margin-top: 100px;">
+            <h1 class="teal-text center-align">{{title}}</h1>
+            <input type="text" v-model="email" placeholder="Email" class="center-align"><br>
+            <input type="password" v-model="password" placeholder="Password" class="center-align"><br>
+            <div class="center-align">
+                <button @click="pageset2" class="btn teal">Sign In</button>
+                <button @click="register" class="btn teal">Sign Up</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="page-3" class="tabcontent">
+        <div class="tabcontent" style="max-width: 400px;margin-top: 100px;">
+            <h1 class="teal-text center-align">Chat</h1>
+            <div class="card-content center-left" style="margin: 20px">
+                <ul id="list_div">
+                    <li v-for="item in messages" :key="item.id "list-style-type="none">
+
+                        <span>{{item.msg}}</span>
+
+                    </li>
+                </ul>
+            </div>
+
+            <input v-model="message" placeholder="messages" class="center-align">
+            <p class="red-text" v-if="feedback">{{feedback}}</p>
+            <div class="center-align">
+                <button @click="sendmsg" class="btn teal">Send</button>
+                <button @click="signOut" class="btn teal">Sign out</button>
+            </div>
+        </div>
+    </template>
+
+    <div id="app">
+
+
+        <page-1 v-if="currentPage == 1"></page-1>
+        <page-2 v-if="currentPage == 2"></page-2>
+        <page-3 v-if="currentPage == 3"></page-3>
+
+
+    </div>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>
